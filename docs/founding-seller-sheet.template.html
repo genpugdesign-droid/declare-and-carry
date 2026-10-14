@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Declare &amp; Carry Founding Seller Program</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;600&display=swap">
+<style>
+  @page { size: Letter; margin: 0.45in 0.55in; }
+  :root { --ink:#0b1b33; --navy:#1f3a6e; --red:#b3141d; --soft:#f3f5f9; --line:#dde2ea; --muted:#56627a; --cream:#e9dfcf; }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: var(--ink); font: 9.6pt/1.42 "Instrument Sans", Helvetica, Arial, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  h1, h2 { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; margin: 0; line-height: 1.05; }
+  .eyebrow { font-size: 7pt; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--red); }
+
+  .mast { background: var(--ink); color: #fff; border-radius: 6pt; padding: 16pt 20pt; display: grid; grid-template-columns: 1fr auto; gap: 14pt; align-items: center; position: relative; overflow: hidden; }
+  .mast::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 95% 140%, rgba(179,20,29,.55), transparent 60%); }
+  .mast > * { position: relative; z-index: 1; }
+  .mast .eyebrow { color: #ff7a85; }
+  .mast h1 { font-size: 30pt; margin-top: 5pt; }
+  .mast h1 em { color: #ff7a85; }
+  .mast p { margin: 6pt 0 0; color: rgba(255,255,255,.8); font-size: 10pt; max-width: 4.6in; }
+  .mast svg { width: 1.55in; height: auto; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7pt; margin-top: 11pt; }
+  .stat { border-left: 3pt solid var(--red); background: var(--soft); padding: 7pt 9pt; }
+  .stat b { display: block; font-size: 19pt; line-height: 1.05; }
+  .stat span { font-size: 8.3pt; color: var(--muted); }
+
+  .grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16pt; margin-top: 12pt; }
+  h2 { font-size: 16pt; border-bottom: 1pt solid var(--line); padding-bottom: 3pt; margin-bottom: 6pt; }
+  ol.flow { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+  ol.flow li { counter-increment: s; display: grid; grid-template-columns: 17pt 1fr; gap: 6pt; padding: 4pt 0; border-bottom: .5pt solid var(--line); }
+  ol.flow li::before { content: counter(s); width: 15pt; height: 15pt; border-radius: 50%; background: var(--ink); color: #fff; font-size: 7.5pt; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-top: 1pt; }
+  ol.flow b { font-weight: 600; }
+  ul.list { margin: 0; padding: 0; list-style: none; }
+  ul.list li { padding: 3.2pt 0 3.2pt 12pt; position: relative; border-bottom: .5pt solid var(--line); }
+  ul.list li::before { content: "★"; position: absolute; left: 0; color: var(--red); font-size: 7pt; top: 4.5pt; }
+  .example { margin-top: 9pt; background: var(--soft); border-radius: 4pt; padding: 8pt 10pt; }
+  .example table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .example td { padding: 1.6pt 0; }
+  .example td.r { text-align: right; }
+  .example tr.total td { border-top: 1pt solid var(--line); padding-top: 4pt; font-weight: 600; }
+  .example small { display: block; color: var(--muted); font-size: 7.8pt; margin-top: 4pt; }
+  .section + .section { margin-top: 10pt; }
+
+  .cta { margin-top: 12pt; display: grid; grid-template-columns: 1.3fr 1fr; gap: 14pt; align-items: stretch; }
+  .cta .box { border: 1pt solid var(--ink); border-radius: 5pt; padding: 9pt 12pt; }
+  .cta h3 { margin: 0 0 4pt; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 15pt; }
+  .cta .url { font-weight: 600; font-size: 11pt; }
+  .write { display: grid; grid-template-columns: auto 1fr; gap: 9pt 6pt; align-items: end; font-size: 8.6pt; color: var(--muted); }
+  .write span.line { border-bottom: .8pt solid var(--muted); height: 12pt; }
+  footer { margin-top: 9pt; font-size: 7.4pt; color: var(--muted); display: flex; justify-content: space-between; gap: 12pt; }
+</style>
+</head>
+<body>
+
+<div class="mast">
+  <div>
+    <div class="eyebrow">Founding seller program · Opening {{LAUNCH}}</div>
+    <h1>Sell the stock you already have. <em>Reach</em> new customers.</h1>
+    <p>Declare &amp; Carry is a new marketplace for everyday goods hit by tariffs. Shoppers come looking for specific products; you list authorized stock you already hold and ship it yourself.</p>
+  </div>
+  {{LOGO}}
+</div>
+
+<div class="stats">
+  <div class="stat"><b>12%</b><span>only when an item sells, card fees included</span></div>
+  <div class="stat"><b>$0</b><span>listing fees or monthly fees</span></div>
+  <div class="stat"><b>Weekly</b><span>payouts, every Friday</span></div>
+  <div class="stat"><b>2 days</b><span>to ship, from your own shelves</span></div>
+</div>
+
+<div class="grid">
+  <div>
+    <div class="section">
+      <h2>How an order works</h2>
+      <ol class="flow">
+        <li><span><b>A shopper orders</b> on declareandcarry.com and pays up front.</span></li>
+        <li><span><b>You get an email</b> with the items and the shipping address.</span></li>
+        <li><span><b>You pack and ship</b> within 2 business days, using your usual carrier, and reply with the tracking number.</span></li>
+        <li><span><b>We handle the shopper:</b> confirmations, tracking updates and customer questions.</span></li>
+        <li><span><b>You get paid</b> every Friday for orders shipped the week before, minus 12%. Shipping the shopper paid is passed to you in full.</span></li>
+      </ol>
+    </div>
+    <div class="example">
+      <table>
+        <tr><td>A $40.00 order of your stock</td><td class="r">$40.00</td></tr>
+        <tr><td>Declare &amp; Carry's 12% (card fees included)</td><td class="r">−$4.80</td></tr>
+        <tr class="total"><td>Paid to you that Friday</td><td class="r">$35.20</td></tr>
+      </table>
+      <small>Plus any shipping the shopper paid. You set your own prices.</small>
+    </div>
+  </div>
+
+  <div>
+    <div class="section">
+      <h2>What founding sellers get</h2>
+      <ul class="list">
+        <li>In front of our founding customers from launch day</li>
+        <li>We build your listings from a spreadsheet you send</li>
+        <li>Your shop name on every listing and order</li>
+        <li>No contract to sign up; leave anytime</li>
+      </ul>
+    </div>
+    <div class="section">
+      <h2>What we ask</h2>
+      <ul class="list">
+        <li>Authorized, name-brand stock, with proof you can show</li>
+        <li>New, sealed retail packaging</li>
+        <li>Ship within 2 business days, with tracking</li>
+        <li>Accept returns of unopened items within 30 days</li>
+        <li>Carry your own general and product liability insurance</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="cta">
+  <div class="box">
+    <h3>Apply in about 3 minutes</h3>
+    <div class="url">declareandcarry.com/sell</div>
+    <div style="margin-top:3pt;color:var(--muted)">or email hello@declareandcarry.com. We reply within 2 business days.</div>
+  </div>
+  <div class="box write">
+    <span>Your contact</span><span class="line"></span>
+    <span>Phone</span><span class="line"></span>
+    <span>Visit notes</span><span class="line"></span>
+  </div>
+</div>
+
+<footer>
+  <span>Declare &amp; Carry is a trade name of Pugnacity LLC.</span>
+  <span>This sheet summarizes the program; the seller agreement governs.</span>
+</footer>
+
+</body>
+</html>
