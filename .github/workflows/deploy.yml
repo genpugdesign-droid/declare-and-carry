@@ -1,12 +1,10 @@
 name: Deploy to GitHub Pages
 
+# Manual only for now: the repo is private, and GitHub Pages needs a paid plan
+# for private repos. Once hosting is chosen, restore the automatic triggers:
+#   push: { branches: [main] }
+#   schedule: [{ cron: "0 14 * * 1" }]   # weekly rebuild keeps dated badges honest
 on:
-  push:
-    branches: [main]
-  # Weekly rebuild (Mondays 14:00 UTC) so the published site never goes stale,
-  # even in weeks with no code changes.
-  schedule:
-    - cron: "0 14 * * 1"
   workflow_dispatch:
 
 permissions:
