@@ -3,7 +3,7 @@ import { TariffStats } from "@/components/TariffStats";
 import { SELLER_COMMISSION_PCT, TRAVELER_PCT } from "@/lib/catalog";
 import { MEMBERSHIP_NAME, plans } from "@/lib/membership";
 import { launchDateLabel, money, site } from "@/lib/site";
-import { Serpent } from "./Serpent";
+import { QuickSignup } from "./QuickSignup";
 
 // Home page while launch.mode is "soon": three ways in (sell, carry, join).
 export function ComingSoon() {
@@ -37,22 +37,18 @@ export function ComingSoon() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_110%,rgba(179,20,29,0.4),transparent_60%)]" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-[3fr_2fr] md:py-24">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-soft">Opening {launchDateLabel()}</p>
-            <h1 className="mt-4 text-5xl sm:text-6xl md:text-7xl">{site.tagline}</h1>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-soft">
+              {site.tagline} · Opening {launchDateLabel()}
+            </p>
+            <h1 className="mt-4 text-5xl sm:text-6xl md:text-7xl">{site.rallyLine}</h1>
             <p className="mt-5 max-w-xl text-lg text-white/75">
               A new marketplace for everyday goods hit by tariffs. Bought at overseas prices by verified travelers, declared at
               customs and delivered, or shipped from authorized US shops.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/sell#apply" className="rounded-xl bg-accent px-5 py-3 font-semibold text-white hover:bg-accent-dark">
-                Become a founding seller
-              </Link>
-              <Link href="/waitlist" className="rounded-xl border border-white/30 px-5 py-3 font-semibold text-white hover:border-white">
-                Join the waitlist
-              </Link>
-            </div>
           </div>
-          <Serpent variant="serpent" height={150} className="hidden justify-self-end md:block" />
+          <div id="early-access" className="scroll-mt-24">
+            <QuickSignup tone="dark" />
+          </div>
         </div>
       </section>
 
@@ -100,13 +96,8 @@ export function OpeningSoon() {
       <p className="mt-4 text-muted">
         We&apos;re signing founding sellers and travelers now. Join the waitlist and we&apos;ll email you the day it opens.
       </p>
-      <div className="mt-8 flex flex-wrap justify-center gap-3">
-        <Link href="/waitlist" className="rounded-xl bg-accent px-5 py-3 font-semibold text-white hover:bg-accent-dark">
-          Join the waitlist
-        </Link>
-        <Link href="/sell#apply" className="rounded-xl border border-line px-5 py-3 font-semibold text-ink hover:border-brand">
-          Become a founding seller
-        </Link>
+      <div className="mx-auto mt-8 max-w-md text-left">
+        <QuickSignup />
       </div>
     </section>
   );

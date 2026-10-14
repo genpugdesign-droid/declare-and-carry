@@ -3,6 +3,8 @@
 export const site = {
   name: "Declare & Carry",
   tagline: "Life, liberty, and lower prices.",
+  // Campaign line for ads, the launch page and the ticker.
+  rallyLine: "Take back your buying power.",
   description:
     "Everyday goods hit hardest by tariffs, bought at overseas prices by verified travelers, declared at customs, and delivered. Duty paid, always.",
   domain: "declareandcarry.com",
@@ -29,6 +31,7 @@ export const launch = {
   forms: {
     sellerApplication: "", // e.g. https://formspree.io/f/xxxxxxx
     waitlist: "",
+    interest: "", // quick sign-up on the launching-soon page; falls back to waitlist
   },
   foundingCheckoutUrl: "", // Stripe Payment Link for the $49 Founding Charter
 };

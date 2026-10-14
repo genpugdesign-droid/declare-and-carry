@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { SELLER_COMMISSION_PCT, TRAVELER_MIN_CENTS, TRAVELER_PCT } from "@/lib/catalog";
-import { isSoon, launchDateLabel, money } from "@/lib/site";
+import { isSoon, launchDateLabel, money, site } from "@/lib/site";
 
 const items = isSoon
   ? [
+      site.rallyLine,
       `Opening ${launchDateLabel()}`,
       "Declared · Duty paid · Delivered",
       `Founding sellers: no listing fees · ${Math.round(SELLER_COMMISSION_PCT * 100)}% only when it sells`,
