@@ -1,9 +1,12 @@
+import { OpeningSoon } from "@/components/ComingSoon";
+import { isSoon } from "@/lib/site";
 import type { Metadata } from "next";
 import { Onboarding } from "./Onboarding";
 
 export const metadata: Metadata = { title: "Become a traveler" };
 
 export default function ApplyPage() {
+  if (isSoon) return <OpeningSoon />;
   return (
     <div className="mx-auto max-w-5xl px-4 py-10">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Traveler sign-up</p>

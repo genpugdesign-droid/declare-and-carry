@@ -1,3 +1,5 @@
+import { ComingSoon } from "@/components/ComingSoon";
+import { isSoon } from "@/lib/site";
 import Link from "next/link";
 import { FitFinder } from "@/components/FitFinder";
 import { TariffStats } from "@/components/TariffStats";
@@ -13,6 +15,7 @@ const promises = [
 ];
 
 export default function Home() {
+  if (isSoon) return <ComingSoon />;
   const top = [...products].sort((a, b) => breakdown(b).savingsPct - breakdown(a).savingsPct).slice(0, 4);
 
   return (

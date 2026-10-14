@@ -3,17 +3,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { site } from "@/lib/site";
+import { isSoon, site } from "@/lib/site";
 import { useCart } from "./CartProvider";
 import { Serpent } from "./Serpent";
 
+// Before launch, the catalog links (shop, requests) are hidden.
 const nav = [
-  { href: "/shop", label: "Shop" },
-  { href: "/travelers", label: "Request an item" },
+  { href: "/shop", label: "Shop", live: true },
+  { href: "/travelers", label: "Request an item", live: true },
   { href: "/waitlist", label: "Carry & earn" },
   { href: "/membership", label: "Membership" },
   { href: "/why", label: "Why prices rose" },
-];
+].filter((n) => !(isSoon && n.live));
 
 export function Logo() {
   return (
@@ -59,6 +60,7 @@ export function Header() {
           >
             Sell with us
           </Link>
+          {!isSoon && (
           <Link
             href="/cart"
             className="relative flex h-10 items-center gap-2 rounded-full border border-line px-4 text-sm font-medium hover:border-brand"
@@ -74,6 +76,7 @@ export function Header() {
               <span className="rounded-full bg-accent px-2 text-xs font-semibold text-white">{count}</span>
             )}
           </Link>
+          )}
           <button
             className="flex h-10 w-10 items-center justify-center rounded-full border border-line md:hidden"
             aria-label="Menu"

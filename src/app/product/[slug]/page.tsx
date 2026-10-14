@@ -1,3 +1,5 @@
+import { OpeningSoon } from "@/components/ComingSoon";
+import { isSoon } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -19,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductPage({ params }: Props) {
+  if (isSoon) return <OpeningSoon />;
   const product = getProduct((await params).slug);
   if (!product) notFound();
 

@@ -14,7 +14,7 @@ const SELLER_COMMISSION = Math.round(SELLER_COMMISSION_PCT * 100);
 const steps = [
   { title: "Apply", body: "Tell us what you stock. Show you're authorized for the brands you list." },
   { title: "List", body: "Send a spreadsheet or your store link; we build your listings and you approve prices." },
-  { title: "Ship", body: "Orders come in with a prepaid label. Ship within 2 business days." },
+  { title: "Ship", body: "Orders arrive by email with the shipping address. Ship within 2 business days and add tracking." },
   { title: "Get paid", body: `Weekly payouts. ${site.name} keeps ${SELLER_COMMISSION}% only when you sell.` },
 ];
 

@@ -1,3 +1,5 @@
+import { OpeningSoon } from "@/components/ComingSoon";
+import { isSoon } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { demoOrder } from "@/lib/orders";
@@ -6,6 +8,7 @@ import { ReportForm } from "./ReportForm";
 export const metadata: Metadata = { title: "Report a problem" };
 
 export default function ReportPage() {
+  if (isSoon) return <OpeningSoon />;
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
       <Link href="/orders/demo" className="text-sm text-muted hover:text-ink">

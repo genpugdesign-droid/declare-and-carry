@@ -1,3 +1,5 @@
+import { OpeningSoon } from "@/components/ComingSoon";
+import { isSoon } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TRAVELER_PCT, categories, getProduct, travelers } from "@/lib/catalog";
@@ -21,6 +23,7 @@ const rules = [
 ];
 
 export default function TravelersPage() {
+  if (isSoon) return <OpeningSoon />;
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Request an item</p>

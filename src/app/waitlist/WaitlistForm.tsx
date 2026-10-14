@@ -2,21 +2,23 @@
 
 import { useState } from "react";
 import { TRAVELER_MIN_CENTS, TRAVELER_PCT, categories } from "@/lib/catalog";
-import { money } from "@/lib/site";
+import { launch, money, submitForm } from "@/lib/site";
 
 type Role = "carry" | "receive";
 
-// Demo only: nothing is sent. At launch, point this at a form service (Tally)
-// or an API route that stores the signup.
+// Sends to launch.forms.waitlist (e.g. Formspree). With no endpoint set it
+// runs as a demo and nothing leaves the browser.
 export function WaitlistForm() {
   const [role, setRole] = useState<Role>("carry");
   const [picked, setPicked] = useState<string[]>([]);
-  const [sent, setSent] = useState(false);
+  const [sent, setSent] = useState<"sent" | "demo" | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
 
   if (sent) {
     return (
       <div className="border-l-4 border-emerald-600 bg-emerald-50 p-5" role="status">
-        <p className="font-semibold text-ink">You&apos;re on the list (demo).</p>
+        <p className="font-semibold text-ink">You&apos;re on the list{sent === "demo" ? " (demo)" : ""}.</p>
         <p className="mt-1 text-sm text-muted">
           {role === "carry"
             ? "We'll email you when traveler delivery opens on your route, with the verification steps to start earning."
@@ -28,9 +30,18 @@ export function WaitlistForm() {
 
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        setSent(true);
+        setBusy(true);
+        setError("");
+        try {
+          const data = { ...Object.fromEntries(new FormData(e.currentTarget)), role, categories: picked.join(", "), form: "waitlist" };
+          setSent(await submitForm(launch.forms.waitlist, data));
+        } catch {
+          setError("That didn't go through. Check your connection and try again.");
+        } finally {
+          setBusy(false);
+        }
       }}
       className="space-y-6"
     >
@@ -69,7 +80,7 @@ export function WaitlistForm() {
         {role === "carry" && (
           <label htmlFor="wl-freq" className="block text-sm font-medium text-ink sm:col-span-2">
             How often do you fly internationally?
-            <select id="wl-freq" required className="mt-1 h-11 w-full rounded-xl border border-line bg-soft px-3 text-base font-normal">
+            <select id="wl-freq" name="wl-freq" required className="mt-1 h-11 w-full rounded-xl border border-line bg-soft px-3 text-base font-normal">
               <option value="">Choose one</option>
               <option>A few times a year</option>
               <option>Monthly</option>
@@ -102,8 +113,12 @@ export function WaitlistForm() {
         </div>
       </fieldset>
 
-      <button className="h-12 w-full rounded-xl bg-accent px-6 font-semibold text-white hover:bg-accent-dark sm:w-auto">
-        Join the waitlist
+      {error && <p className="text-sm text-accent">{error}</p>}
+      <button
+        disabled={busy}
+        className="h-12 w-full rounded-xl bg-accent px-6 font-semibold text-white hover:bg-accent-dark disabled:opacity-50 sm:w-auto"
+      >
+        {busy ? "Sending…" : "Join the waitlist"}
       </button>
     </form>
   );
@@ -120,6 +135,7 @@ function Field({
       {label}
       <input
         id={id}
+        name={id}
         required={required}
         {...input}
         className="mt-1 h-11 w-full rounded-xl border border-line bg-soft px-3 text-base font-normal outline-none focus:border-brand focus:bg-surface"

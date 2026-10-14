@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useMembership } from "@/components/MembershipProvider";
 import { MEMBERSHIP_NAME, plans, yearlyFeesAvoidedCents, yearlySavingsPct, type PlanId } from "@/lib/membership";
-import { money } from "@/lib/site";
+import { launch, money } from "@/lib/site";
 
 // Plan picker + join button. Demo: joining flips a flag in this browser so the
 // member prices show across the site; production would start a Stripe subscription.
@@ -60,13 +60,25 @@ export function PlanPicker() {
         {plan !== "monthly" ? `That's ${money(monthlyEquivalent)} a month. ` : ""}
         {p.billed}
       </p>
-      <button
-        onClick={() => join(plan)}
-        className="mt-5 h-12 w-full rounded-xl bg-accent px-6 font-semibold text-white hover:bg-accent-dark"
-      >
-        {plan === "founding" ? `Reserve a Founding ${MEMBERSHIP_NAME} spot` : `Become a ${MEMBERSHIP_NAME} member`}
-      </button>
-      <p className="mt-2 text-center text-xs text-muted">Demo — no charge. Turns on member prices in this browser.</p>
+      {plan === "founding" && launch.foundingCheckoutUrl ? (
+        // Real checkout: the Stripe Payment Link for the Founding pre-sale.
+        <a
+          href={launch.foundingCheckoutUrl}
+          className="mt-5 flex h-12 w-full items-center justify-center rounded-xl bg-accent px-6 font-semibold text-white hover:bg-accent-dark"
+        >
+          Reserve a Founding {MEMBERSHIP_NAME} spot
+        </a>
+      ) : (
+        <>
+          <button
+            onClick={() => join(plan)}
+            className="mt-5 h-12 w-full rounded-xl bg-accent px-6 font-semibold text-white hover:bg-accent-dark"
+          >
+            {plan === "founding" ? `Reserve a Founding ${MEMBERSHIP_NAME} spot` : `Become a ${MEMBERSHIP_NAME} member`}
+          </button>
+          <p className="mt-2 text-center text-xs text-muted">Demo — no charge. Turns on member prices in this browser.</p>
+        </>
+      )}
     </div>
   );
 }

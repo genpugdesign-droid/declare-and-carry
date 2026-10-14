@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { isSoon, launchDateLabel, site } from "@/lib/site";
 import { Logo } from "./Header";
 import { Serpent } from "./Serpent";
 
@@ -15,13 +15,18 @@ export function Footer() {
           </div>
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-ink">Shop</h3>
+          <h3 className="text-sm font-semibold text-ink">{isSoon ? "Explore" : "Shop"}</h3>
           <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li><Link href="/shop" className="hover:text-brand">All products</Link></li>
-            <li><Link href="/#search" className="hover:text-brand">Search</Link></li>
-            <li><Link href="/travelers" className="hover:text-brand">Traveler delivery</Link></li>
+            {!isSoon && (
+              <>
+                <li><Link href="/shop" className="hover:text-brand">All products</Link></li>
+                <li><Link href="/#search" className="hover:text-brand">Search</Link></li>
+                <li><Link href="/travelers" className="hover:text-brand">Traveler delivery</Link></li>
+              </>
+            )}
             <li><Link href="/membership" className="hover:text-brand">Charter membership</Link></li>
-            <li><Link href="/orders/demo" className="hover:text-brand">Track an order (demo)</Link></li>
+            <li><Link href="/why" className="hover:text-brand">Why prices rose</Link></li>
+            {!isSoon && <li><Link href="/orders/demo" className="hover:text-brand">Track an order (demo)</Link></li>}
           </ul>
         </div>
         <div>
@@ -35,7 +40,9 @@ export function Footer() {
       </div>
       <p className="border-t border-line px-4 py-6 text-center text-xs text-muted">
         © {new Date().getFullYear()} {site.legalEntity}. {site.name} is a trade name of {site.legalEntity}.
-        <span className="block">Demo storefront — products and sellers shown are sample data.</span>
+        <span className="block">
+          {isSoon ? `Opening ${launchDateLabel()}.` : "Demo storefront — products and sellers shown are sample data."}
+        </span>
       </p>
     </footer>
   );

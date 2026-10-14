@@ -1,3 +1,5 @@
+import { OpeningSoon } from "@/components/ComingSoon";
+import { isSoon } from "@/lib/site";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { ShopGrid } from "./ShopGrid";
@@ -5,6 +7,7 @@ import { ShopGrid } from "./ShopGrid";
 export const metadata: Metadata = { title: "Shop" };
 
 export default function ShopPage() {
+  if (isSoon) return <OpeningSoon />;
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="text-3xl font-bold text-ink">Shop</h1>

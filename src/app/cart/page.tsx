@@ -1,5 +1,7 @@
 "use client";
 
+import { OpeningSoon } from "@/components/ComingSoon";
+import { isSoon } from "@/lib/site";
 import Link from "next/link";
 import { linePriceCents, useCart } from "@/components/CartProvider";
 import { useMembership } from "@/components/MembershipProvider";
@@ -10,6 +12,11 @@ import { money } from "@/lib/site";
 const FREE_SHIPPING_CENTS = 3500;
 
 export default function CartPage() {
+  if (isSoon) return <OpeningSoon />;
+  return <CartPageContents />;
+}
+
+function CartPageContents() {
   const { lines, subtotalCents, update, remove } = useCart();
   const { member } = useMembership();
   // Shipping only applies to US-stock lines (traveler orders are handed off or

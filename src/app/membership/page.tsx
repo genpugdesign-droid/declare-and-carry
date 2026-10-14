@@ -114,8 +114,8 @@ export default function MembershipPage() {
           </div>
 
           <div>
-            <h2 className="text-3xl text-ink">One real order</h2>
-            <p className="mt-2 text-sm text-muted">{example.name}, carried from {example.boughtIn}.</p>
+            <h2 className="text-3xl text-ink">An example order</h2>
+            <p className="mt-2 text-sm text-muted">{example.name}, carried from {example.boughtIn}. Sample prices.</p>
             <div className="mt-4 overflow-hidden rounded-2xl border border-line">
               <table className="w-full text-sm tabular-nums">
                 <thead className="bg-soft text-xs uppercase tracking-[0.15em] text-muted">
