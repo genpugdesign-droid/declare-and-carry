@@ -1,0 +1,90 @@
+{
+  "measure": "US average effective tariff rate, pre-substitution (Yale Budget Lab)",
+  "lastChecked": "2026-10-13",
+  "points": [
+    {
+      "date": "2025-01-15",
+      "rate": 2.4,
+      "label": "Starting point",
+      "reason": "The average tariff on imports before the 2025 changes, roughly where it had been for years."
+    },
+    {
+      "date": "2025-04-08",
+      "rate": 22.5,
+      "label": "Border, steel & “Liberation Day” tariffs",
+      "since": "1909",
+      "reason": "New tariffs on Canada, Mexico and China, justified as a response to fentanyl and illegal immigration; 25% on all steel and aluminum, justified as national security; then “reciprocal” tariffs on nearly every country, justified by trade deficits."
+    },
+    {
+      "date": "2025-04-15",
+      "rate": 28,
+      "label": "China escalation",
+      "since": "1901",
+      "reason": "Higher rates on most countries were paused for 90 days, but tariffs on Chinese goods climbed past 100% as the US and China retaliated against each other."
+    },
+    {
+      "date": "2025-08-01",
+      "rate": 18.3,
+      "label": "Truce & country deals",
+      "since": "1934",
+      "reason": "A US–China truce cut the China rate, and deals with trading partners set new country-by-country rates."
+    },
+    {
+      "date": "2025-10-17",
+      "rate": 18,
+      "label": "Small-package exemption ends",
+      "since": "1934",
+      "reason": "The duty-free allowance for small shipments ended for all countries, and new national-security tariffs were added on goods like lumber and furniture."
+    },
+    {
+      "date": "2025-11-17",
+      "rate": 16.8,
+      "label": "Food rollbacks",
+      "since": "1935",
+      "reason": "Tariffs on some groceries like coffee, beef and bananas were rolled back over affordability concerns, and a new China deal lowered rates further."
+    },
+    {
+      "date": "2026-01-19",
+      "rate": 16.9,
+      "label": "New year, same level",
+      "since": "1932",
+      "reason": "Rates held roughly steady heading into 2026."
+    },
+    {
+      "date": "2026-02-21",
+      "rate": 13.7,
+      "label": "Supreme Court ruling",
+      "reason": "The Supreme Court ruled the emergency-powers law didn't authorize most of the 2025 tariffs. They were replaced the same week with a temporary 15% global tariff under a different law."
+    },
+    {
+      "date": "2026-04-06",
+      "rate": 11.8,
+      "label": "Metals tariffs restructured",
+      "reason": "The national-security tariffs on steel, aluminum and copper were reworked."
+    },
+    {
+      "date": "2026-08-15",
+      "rate": 11,
+      "label": "Temporary tariff replaced",
+      "reason": "The temporary tariff expired in July and was replaced with new 10–12.5% tariffs on about 60 trading partners, justified as a response to unfair trade practices. Unlike the temporary version, these have no built-in end date."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Yale Budget Lab, State of U.S. Tariffs (2025–2026 reports)",
+      "url": "https://budgetlab.yale.edu/research/state-us-tariffs"
+    },
+    {
+      "label": "Yale Budget Lab, SCOTUS ruling update (Feb 20, 2026)",
+      "url": "https://budgetlab.yale.edu/research/state-us-tariffs-february-20-2026"
+    },
+    {
+      "label": "Congressional Research Service on the IEEPA ruling",
+      "url": "https://www.congress.gov/crs-product/LSB11398"
+    },
+    {
+      "label": "NAFTZ: Section 122 tariffs expiring (Jul 22, 2026)",
+      "url": "https://www.naftz.org/section-122-tariffs-expiring-as-new-trade-actions-continue-july-22-2026/"
+    }
+  ]
+}
