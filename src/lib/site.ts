@@ -30,7 +30,7 @@ export const launch = {
   forms: {
     sellerApplication: "", // e.g. https://formspree.io/f/xxxxxxx
     waitlist: "",
-    interest: "", // quick sign-up on the launching-soon page; falls back to waitlist
+    interest: "https://script.google.com/macros/s/AKfycbwy2tbQJXx1nHlK8RE3f7b50mK1WIiev-TAPKF4447u-GFayhmqEBntKvjQtG44QR8Kng/exec", // quick sign-up on the launching-soon page; falls back to waitlist
   },
   foundingCheckoutUrl: "", // Stripe Payment Link for the $49 Founding Charter
 };
