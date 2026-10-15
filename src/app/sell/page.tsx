@@ -1,3 +1,5 @@
+import { OpeningSoon } from "@/components/ComingSoon";
+import { isSoon } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SELLER_COMMISSION_PCT, TRAVELER_MIN_CENTS, TRAVELER_PCT, breakdown, getProduct } from "@/lib/catalog";
@@ -26,6 +28,7 @@ const reasons = [
 ];
 
 export default function SellPage() {
+  if (isSoon) OpeningSoon();
   const b = breakdown(example);
   const perTrip = b.traveler * 8; // e.g. 8 small orders on one trip
 

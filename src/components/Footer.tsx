@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { isSoon, launchDateLabel, site } from "@/lib/site";
+import { legalEntity } from "@/lib/legal";
+import { isSoon, site } from "@/lib/site";
 import { Logo } from "./Header";
 import { Serpent } from "./Serpent";
 
@@ -14,34 +15,46 @@ export function Footer() {
             <p className="mt-3 max-w-sm text-sm text-muted">{site.description}</p>
           </div>
         </div>
-        <div>
-          <h3 className="text-sm font-semibold text-ink">{isSoon ? "Explore" : "Shop"}</h3>
-          <ul className="mt-3 space-y-2 text-sm text-muted">
-            {!isSoon && (
-              <>
+        {isSoon ? (
+          <div className="sm:col-span-2">
+            <h3 className="text-sm font-semibold text-ink">Explore</h3>
+            <ul className="mt-3 space-y-2 text-sm text-muted">
+              <li><Link href="/#join" className="hover:text-brand">Join the waitlist</Link></li>
+              <li><Link href="/why" className="hover:text-brand">Why prices rose</Link></li>
+              <li><a href={`mailto:${site.supportEmail}`} className="hover:text-brand">{site.supportEmail}</a></li>
+            </ul>
+          </div>
+        ) : (
+          <>
+            <div>
+              <h3 className="text-sm font-semibold text-ink">Shop</h3>
+              <ul className="mt-3 space-y-2 text-sm text-muted">
                 <li><Link href="/shop" className="hover:text-brand">All products</Link></li>
                 <li><Link href="/#search" className="hover:text-brand">Search</Link></li>
                 <li><Link href="/travelers" className="hover:text-brand">Traveler delivery</Link></li>
-              </>
-            )}
-            <li><Link href="/membership" className="hover:text-brand">Charter membership</Link></li>
-            <li><Link href="/why" className="hover:text-brand">Why prices rose</Link></li>
-            {!isSoon && <li><Link href="/orders/demo" className="hover:text-brand">Track an order (demo)</Link></li>}
-          </ul>
-        </div>
-        <div>
-          <h3 className="text-sm font-semibold text-ink">Partners</h3>
-          <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li><Link href="/sell" className="hover:text-brand">Become a seller</Link></li>
-            <li><Link href="/waitlist" className="hover:text-brand">Traveler waitlist</Link></li>
-            <li><a href={`mailto:${site.supportEmail}`} className="hover:text-brand">{site.supportEmail}</a></li>
-          </ul>
-        </div>
+                <li><Link href="/membership" className="hover:text-brand">Charter membership</Link></li>
+                <li><Link href="/why" className="hover:text-brand">Why prices rose</Link></li>
+                <li><Link href="/orders/demo" className="hover:text-brand">Track an order (demo)</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-ink">Partners</h3>
+              <ul className="mt-3 space-y-2 text-sm text-muted">
+                <li><Link href="/sell" className="hover:text-brand">Become a seller</Link></li>
+                <li><Link href="/waitlist" className="hover:text-brand">Traveler waitlist</Link></li>
+                <li><a href={`mailto:${site.supportEmail}`} className="hover:text-brand">{site.supportEmail}</a></li>
+              </ul>
+            </div>
+          </>
+        )}
       </div>
       <p className="border-t border-line px-4 py-6 text-center text-xs text-muted">
-        © {new Date().getFullYear()} {site.legalEntity}. {site.name} is a trade name of {site.legalEntity}.
+        {/* The operating entity stays off the site until launch. */}
+        {isSoon
+          ? `© ${new Date().getFullYear()} ${site.name}.`
+          : `© ${new Date().getFullYear()} ${legalEntity}. ${site.name} is a trade name of ${legalEntity}.`}
         <span className="block">
-          {isSoon ? `Opening ${launchDateLabel()}.` : "Demo storefront — products and sellers shown are sample data."}
+          {isSoon ? "Opening soon." : "Demo storefront — products and sellers shown are sample data."}
         </span>
       </p>
     </footer>

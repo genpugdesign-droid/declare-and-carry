@@ -1,13 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-import { launch, launchDateLabel, submitForm } from "@/lib/site";
+import { launch, submitForm } from "@/lib/site";
 
 const roles = [
-  { id: "seller", label: "Founding seller", hint: "I have stock to sell", next: { href: "/sell#apply", text: "Finish your seller application" } },
-  { id: "traveler", label: "Traveler", hint: "I travel and want to earn", next: { href: "/waitlist", text: "Add your routes" } },
-  { id: "interested", label: "Just interested", hint: "Tell me when it opens", next: { href: "/membership", text: "See the Founding Charter pre-sale" } },
+  { id: "interested", label: "Shopper", hint: "Tell me when it opens" },
+  { id: "traveler", label: "Traveler", hint: "I travel and want to earn" },
+  { id: "seller", label: "Seller", hint: "I have US stock to sell" },
 ] as const;
 
 type RoleId = (typeof roles)[number]["id"];
@@ -18,6 +17,7 @@ type RoleId = (typeof roles)[number]["id"];
 export function QuickSignup({ tone = "light" }: { tone?: "light" | "dark" }) {
   const [role, setRole] = useState<RoleId>("interested");
   const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot: people never see it, bots fill it in
   const [state, setState] = useState<"idle" | "busy" | "sent" | "demo" | "error">("idle");
   const picked = roles.find((r) => r.id === role)!;
 
@@ -26,11 +26,8 @@ export function QuickSignup({ tone = "light" }: { tone?: "light" | "dark" }) {
       <div className="rounded-2xl bg-white p-5 text-ink sm:p-6" role="status">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">You&apos;re in{state === "demo" ? " (demo)" : ""}</p>
         <p className="mt-2 text-2xl" style={{ fontFamily: "var(--font-display), Georgia, serif" }}>
-          We&apos;ll email {email} before we open on {launchDateLabel()}.
+          We&apos;ll email {email} as soon as we open.
         </p>
-        <Link href={picked.next.href} className="mt-4 inline-block font-semibold text-brand underline-offset-4 hover:underline">
-          {picked.next.text} →
-        </Link>
       </div>
     );
   }
@@ -42,14 +39,16 @@ export function QuickSignup({ tone = "light" }: { tone?: "light" | "dark" }) {
         setState("busy");
         try {
           const endpoint = launch.forms.interest || launch.forms.waitlist;
-          setState(await submitForm(endpoint, { email, role, form: "quick-signup" }));
+          setState(
+            await submitForm(endpoint, { email, role, website, page: location.pathname, referrer: document.referrer, form: "quick-signup" }),
+          );
         } catch {
           setState("error");
         }
       }}
-      className={`rounded-2xl bg-white p-5 text-ink sm:p-6 ${tone === "light" ? "border border-line" : ""}`}
+      className={`relative rounded-2xl bg-white p-5 text-ink sm:p-6 ${tone === "light" ? "border border-line" : ""}`}
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Get early access</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Join the waitlist</p>
       <fieldset className="mt-3">
         <legend className="text-sm font-semibold">I&apos;m a…</legend>
         <div className="mt-2 grid grid-cols-3 gap-2">
@@ -69,6 +68,16 @@ export function QuickSignup({ tone = "light" }: { tone?: "light" | "dark" }) {
         </div>
         <p className="mt-2 text-xs text-muted">{picked.hint}</p>
       </fieldset>
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+        className="absolute -left-[9999px] h-px w-px opacity-0"
+      />
       <label htmlFor="quick-email" className="mt-4 block text-sm font-semibold">
         Email
       </label>
@@ -85,7 +94,7 @@ export function QuickSignup({ tone = "light" }: { tone?: "light" | "dark" }) {
         />
         <button
           disabled={state === "busy"}
-          className="h-12 w-full shrink-0 rounded-xl bg-accent px-5 font-semibold text-white hover:bg-accent-dark disabled:opacity-50 sm:w-auto"
+          className="soon-shine h-12 w-full shrink-0 rounded-xl bg-accent px-5 font-semibold text-white hover:bg-accent-dark disabled:opacity-50 sm:w-auto"
         >
           {state === "busy" ? "Sending…" : "Count me in"}
         </button>

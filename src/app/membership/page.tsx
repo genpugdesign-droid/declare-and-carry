@@ -1,3 +1,5 @@
+import { OpeningSoon } from "@/components/ComingSoon";
+import { isSoon } from "@/lib/site";
 import type { Metadata } from "next";
 import { SERVICE_PCT, TRAVELER_MIN_CENTS, breakdown, getProduct } from "@/lib/catalog";
 import { FOUNDING_CAP, MEMBERSHIP_NAME, perks, plans } from "@/lib/membership";
@@ -36,6 +38,7 @@ const faqs = [
 ];
 
 export default function MembershipPage() {
+  if (isSoon) OpeningSoon();
   const free = breakdown(example, 1, false);
   const member = breakdown(example, 1, true);
   const rows = [

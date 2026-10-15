@@ -4,7 +4,7 @@ import { Serpent } from "@/components/Serpent";
 import { TariffChart } from "@/components/TariffChart";
 import { TariffStats } from "@/components/TariffStats";
 import { TRAVELER_PCT } from "@/lib/catalog";
-import { site } from "@/lib/site";
+import { isSoon, site } from "@/lib/site";
 import { formatLongDate, tariffPoints, tariffSources } from "@/lib/tariffs";
 
 export const metadata: Metadata = {
@@ -75,6 +75,13 @@ export default function WhyPage() {
                 The American people have a right not only to a modest life, but to a well-lived one.
               </p>
             </div>
+            {isSoon ? (
+            <div className="mt-8">
+              <Link href="/#join" className="inline-block rounded-xl bg-accent px-6 py-3 font-semibold text-white hover:bg-accent-dark">
+                Join the waitlist
+              </Link>
+            </div>
+            ) : (
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/shop" className="rounded-xl bg-accent px-5 py-3 font-semibold text-white hover:bg-accent-dark">
                 Shop at overseas prices
@@ -83,6 +90,7 @@ export default function WhyPage() {
                 Earn as a traveler
               </Link>
             </div>
+            )}
           </div>
         </div>
       </section>

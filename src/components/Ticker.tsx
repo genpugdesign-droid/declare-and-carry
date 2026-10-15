@@ -1,15 +1,14 @@
 import Link from "next/link";
 import { SELLER_COMMISSION_PCT, TRAVELER_MIN_CENTS, TRAVELER_PCT } from "@/lib/catalog";
-import { isSoon, launchDateLabel, money, site } from "@/lib/site";
+import { isSoon, money, site } from "@/lib/site";
 
 const items = isSoon
   ? [
       site.rallyLine,
-      `Opening ${launchDateLabel()}`,
+      "Opening soon",
       "Declared · Duty paid · Delivered",
-      `Founding sellers: no listing fees · ${Math.round(SELLER_COMMISSION_PCT * 100)}% only when it sells`,
-      "Founding Charter pre-sale: $49 your first year",
-      `Travelers earn ${TRAVELER_PCT * 100}% · join the waitlist`,
+      "Everyday goods hit by tariffs, at overseas prices",
+      "Join the waitlist",
     ]
   : [
   "Declared · Duty paid · Delivered",
@@ -25,7 +24,7 @@ const items = isSoon
 // motion stops for people who prefer reduced motion.
 export function Ticker() {
   return (
-    <Link href={isSoon ? "/waitlist" : "/shop"} className="block overflow-hidden bg-ink text-white" aria-label={isSoon ? "Join the waitlist" : "Shop overseas prices"}>
+    <Link href={isSoon ? "/#join" : "/shop"} className="block overflow-hidden bg-ink text-white" aria-label={isSoon ? "Join the waitlist" : "Shop overseas prices"}>
       <div className="flex w-max animate-ticker py-1.5" aria-hidden>
         {[0, 1].map((copy) => (
           <div key={copy} className="flex shrink-0">

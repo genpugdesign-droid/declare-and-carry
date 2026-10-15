@@ -1,3 +1,5 @@
+import { OpeningSoon } from "@/components/ComingSoon";
+import { isSoon } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TRAVELER_PCT } from "@/lib/catalog";
@@ -15,6 +17,7 @@ const opening = [
 ];
 
 export default function WaitlistPage() {
+  if (isSoon) OpeningSoon();
   return (
     <>
       <section className="relative overflow-hidden bg-ink text-white">

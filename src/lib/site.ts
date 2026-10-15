@@ -9,8 +9,7 @@ export const site = {
     "Everyday goods hit hardest by tariffs, bought at overseas prices by verified travelers, declared at customs, and delivered. Duty paid, always.",
   domain: "declareandcarry.com",
   supportEmail: "hello@declareandcarry.com",
-  // Legal entity that operates the brand (Declare & Carry is its DBA).
-  legalEntity: "Pugnacity LLC",
+  // The operating legal entity is in src/lib/legal.ts (server-only).
 };
 
 // Prefix for static assets when deployed under a GitHub Pages subpath.
@@ -27,7 +26,7 @@ export function money(cents: number) {
 // they're empty, those forms run in demo mode and nothing is collected.
 export const launch = {
   mode: "soon" as "soon" | "live",
-  date: "2026-10-28", // PLACEHOLDER: confirm the real launch date
+  date: "2026-10-28", // PLACEHOLDER, not shown while mode is "soon" (the site just says "Opening soon")
   forms: {
     sellerApplication: "", // e.g. https://formspree.io/f/xxxxxxx
     waitlist: "",
@@ -43,13 +42,23 @@ export function launchDateLabel() {
 }
 
 // Sends a form to the configured endpoint. Returns "demo" when no endpoint is set.
+// Google Apps Script web apps can't answer a CORS preflight, so those get the
+// JSON as text/plain (a "simple" request); scripts/waitlist-receiver.gs parses it.
 export async function submitForm(endpoint: string, data: Record<string, unknown>): Promise<"sent" | "demo"> {
   if (!endpoint) return "demo";
+  const appsScript = endpoint.startsWith("https://script.google.com/");
   const res = await fetch(endpoint, {
     method: "POST",
-    headers: { Accept: "application/json", "Content-Type": "application/json" },
+    headers: appsScript
+      ? { "Content-Type": "text/plain;charset=utf-8" }
+      : { Accept: "application/json", "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
+  if (appsScript && res.ok) {
+    const reply = await res.json().catch(() => null);
+    if (!reply?.ok) throw new Error(`Sheet rejected the sign-up: ${reply?.error ?? "no reply"}`);
+    return "sent";
+  }
   if (!res.ok) throw new Error(`Form service returned ${res.status}`);
   return "sent";
 }

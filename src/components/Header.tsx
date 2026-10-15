@@ -7,14 +7,19 @@ import { isSoon, site } from "@/lib/site";
 import { useCart } from "./CartProvider";
 import { Serpent } from "./Serpent";
 
-// Before launch, the catalog links (shop, requests) are hidden.
+// Before launch, everything but "Why prices rose" is hidden.
 const nav = [
   { href: "/shop", label: "Shop", live: true },
   { href: "/travelers", label: "Request an item", live: true },
-  { href: "/waitlist", label: "Carry & earn" },
-  { href: "/membership", label: "Membership" },
+  { href: "/waitlist", label: "Carry & earn", live: true },
+  { href: "/membership", label: "Membership", live: true },
   { href: "/why", label: "Why prices rose" },
 ].filter((n) => !(isSoon && n.live));
+
+// Before launch the only call to action is the waitlist sign-up on the home page.
+const cta = isSoon
+  ? { href: "/#join", label: "Join the waitlist", mobile: "Join the waitlist" }
+  : { href: "/sell", label: "Sell with us", mobile: "Sell your US stock with us" };
 
 export function Logo() {
   return (
@@ -55,10 +60,12 @@ export function Header() {
 
         <div className="ml-auto flex items-center gap-2">
           <Link
-            href="/sell"
-            className="hidden h-10 items-center rounded-full border border-accent px-4 text-sm font-semibold text-accent hover:bg-accent hover:text-white lg:flex"
+            href={cta.href}
+            className={`h-10 items-center rounded-full border border-accent px-4 text-sm font-semibold text-accent hover:bg-accent hover:text-white ${
+              isSoon ? "hidden sm:flex" : "hidden lg:flex"
+            }`}
           >
-            Sell with us
+            {cta.label}
           </Link>
           {!isSoon && (
           <Link
@@ -93,11 +100,11 @@ export function Header() {
       {open && (
         <nav className="border-t border-line bg-surface px-4 py-2 md:hidden">
           <Link
-            href="/sell"
+            href={cta.href}
             onClick={() => setOpen(false)}
             className="my-2 flex h-11 items-center justify-center rounded-xl bg-accent font-semibold text-white"
           >
-            Sell your US stock with us
+            {cta.mobile}
           </Link>
           {nav.map((n) => (
             <Link
